@@ -9,15 +9,24 @@ steps:
   inputs:
     terraformVersion: 'latest'
 
-- task: CmdLine@2
+- task: TerraformTaskV4@4
   inputs:
-    script: 'terraform init'
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'az-terraform'
+    backendAzureRmResourceGroupName: 'Devops-RG'
+    backendAzureRmStorageAccountName: '$(storage_account_name)'
+    backendAzureRmContainerName: '$(container_name)'
+    backendAzureRmKey: 'terraform.tfstate'
 
-- task: CmdLine@2
+- task: TerraformTaskV4@4
   inputs:
-    script: 'terraform plan'
+    provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'az-terraform' 
 
-
-- task: CmdLine@2
+- task: TerraformTaskV4@4
   inputs:
-    script: 'terraform apply -auto-approve'
+    provider: 'azurerm'
+    command: 'apply'
+    environmentServiceNameAzureRM: 'az-terraform'
