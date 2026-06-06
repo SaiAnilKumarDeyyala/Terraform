@@ -1,27 +1,24 @@
+# resource group 
 output "resource_group_name" {
   value = data.azurerm_resource_group.resource_group.name
 }
 
+# storage account
 output "storage_account_name" {
   value = azurerm_storage_account.storage_account.name
 }
 
-output "storage_container_name" {
-  value = azurerm_storage_container.storage_container.name
+output "id" {
+  description = "The resource ID of the storage account"
+  value       = azurerm_storage_account.storage_account.id
 }
 
-output "location" {
-  value = data.azurerm_resource_group.resource_group.location
+output "primary_blob_endpoint" {
+  description = "Primary blob endpoint URL"
+  value       = azurerm_storage_account.storage_account.primary_blob_endpoint
 }
 
-output "account_tier" {
-  value = azurerm_storage_account.storage_account.account_tier
-}
-
-output "account_replication_type" {
-  value = azurerm_storage_account.storage_account.account_replication_type
-}
-
-output "container_access_type" {
-  value = azurerm_storage_container.storage_container.container_access_type
+output "primary_location" {
+  description = "Primary location of the storage account"
+  value       = azurerm_storage_account.storage_account.primary_location
 }
